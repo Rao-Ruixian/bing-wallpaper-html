@@ -1,0 +1,142 @@
+<!-------------------------------------------- 
+
+	我（学游渊）不是专业的前端工程师，我更侧重的是电路 创客。
+	所以html见谅了:)
+	魔改于 @zhanglintc 开源方案
+  https://github.com/Rao-Ruixian/bing-wallpaper-html
+
+-------------------------------------------->
+<!DOCTYPE html>
+<!-- https://mp.weixin.qq.com/s/--9XcLI9g5KhJQKA1B4U3g -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"> <!-- 声明文档类型为HTML5 -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <!-- 设置文档字符编码为UTF-8 -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- 强制升级不安全的请求 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- 兼容IE浏览器 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口以支持响应式设计 -->
+  <!-- RRX调用图标地址 START-->
+  <link rel="shortcut icon" type="image/x-icon" href="https://rrxweb.top/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="https://rrxweb.top/rrximg/icon/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="192x192" href="https://rrxweb.top/rrximg/icon/android-icon-192x192.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://rrxweb.top/rrximg/icon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="https://rrxweb.top/rrximg/icon/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="https://rrxweb.top/rrximg/icon/favicon-16x16.png" />
+  <!-- RRX调用图标地址 END-->
+  <title>✨高二七班✨</title> <!-- 网页标题 -->
+  <style type="text/css">
+    :root {
+      --base-width: 1000px;
+      /* 调整图片基础宽度 */
+      --base-height: calc(var(--base-width) * 9 / 16);
+      /* 根据基础宽度计算高度以保持16:9比例 */
+    }
+
+    img {
+      width: var(--base-width);
+      height: var(--base-height);
+      border-radius: 10px;
+      /* 添加圆角效果 */
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      /* 添加阴影效果 */
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      /* 设置字体 */
+      text-align: center;
+      /* 中心对齐文本 */
+      background-color: #f0f0f0;
+      /* 设置背景颜色 */
+      margin: 0;
+      /* 移除默认边距 */
+      padding: 20px;
+      /* 添加内边距 */
+    }
+
+    audio {
+      width: 100px;
+      /* 设置音频控制的宽度 */
+      margin-bottom: 20px;
+      /* 设置音频控件底部间距 */
+    }
+
+
+
+    .description {
+      margin-top: 20px;
+      /* 顶部间距 */
+      font-size: 18px;
+      /* 设置文字大小 */
+      font-weight: bold;
+      /* 设置文字为加粗 */
+      color: #333;
+      /* 设置文字颜色 */
+      line-height: 1.5;
+      /* 设置行间距 */
+    }
+
+    .fav {
+      cursor: pointer;
+      /* 设置鼠标悬停时的光标样式为手型 */
+      font-size: 28px;
+      /* 调整星星图标的大小 */
+      margin-top: 10px;
+      /* 顶部间距 */
+      color: #ffcc00;
+      /* 星星的颜色 */
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <!-- 音频播放控件 -->
+    <audio controls src="https://rrxweb.top/eng/english/41.mp3"></audio>
+    <audio controls src="https://rrxweb.top/eng/english/42.mp3"></audio>
+    <audio controls src="https://rrxweb.top/eng/english/43.mp3"></audio>
+    <audio controls src="https://rrxweb.top/eng/english/44.mp3"></audio>
+    <audio controls src="https://rrxweb.top/eng/english/45.mp3"></audio>
+  </div>
+
+  <div id="img-container"> <!-- 图片容器 -->
+    <div class="img-container">
+      <a id="img-link" href="https://bing.zhanglintc.co/?daysAgo=0"> <!-- 图片链接 -->
+        <img id="img0" src="https://bing.zhanglintc.co/?daysAgo=0" alt="Bing Wallpaper"> <!-- 图片 -->
+      </a>
+    </div>
+    <div class="description" id="description-container"> <!-- 描述容器 -->
+      <span id="fav0" class="fav" onclick="favourite(0)">✩</span> <!-- 收藏星星 -->
+      <span id="span0" style="display: none;"></span> <!-- 隐藏的描述信息 -->
+    </div>
+  </div>
+
+  <script type="text/javascript" src="./jquery-3.5.0.min.js"></script> <!-- 引入jQuery库 -->
+  <script type="text/javascript">
+    function callback_img(daysAgo, description) { // 处理图片描述的回调函数
+      let m_img = $(`#img${daysAgo}`); // 选取对应的图片
+      m_img.attr("title", description); // 设置title属性为描述
+      let m_span = $(`#span${daysAgo}`); // 选取对应的隐藏描述span
+      m_span.html(description); // 设置描述内容
+      m_span.show(); // 显示描述内容
+    }
+
+    function callback_get_fulldata(daysAgo, jsn) { // 处理获取完整数据的回调函数
+      window.data[daysAgo] = jsn; // 将数据存储在全局变量中
+      let fav = $(`#fav${daysAgo}`); // 选取对应的收藏星星
+      fav.html(window.data[daysAgo].in_db ? "★" : "☆"); // 根据是否收藏决定星星图标
+    }
+
+    // Fetch data for the first image
+    callback_get_fulldata(0, {}); // 模拟调用以设置数据
+    callback_img(0, "First image description"); // 模拟调用以设置图片描述
+  </script>
+
+  <script defer src="https://bing.zhanglintc.co/fulldata_callback?daysAgo=0&callback=callback_get_fulldata"></script>
+  <!-- 异步获取完整数据 -->
+  <script defer src="https://bing.zhanglintc.co/description_with_callback?daysAgo=0&callback=callback_img"></script>
+  <!-- 异步获取图片描述 -->
+</body>
+
+</html>
