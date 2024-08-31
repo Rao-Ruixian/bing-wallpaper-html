@@ -3,3 +3,4 @@
 ## 食用方法：
 直接打包下载zip，解压到服务器，访问index.html文件即可。
 ![](https://bing.zhanglintc.co/?daysAgo=0)
+个人博客：https://blog.rrxweb.top/
